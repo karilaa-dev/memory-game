@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Game - Final Version</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="game-container">
+        <div class="controls">
+            <select id="difficulty">
+                <option value="2">Easy (2x2)</option>
+                <option value="4">Medium (4x4)</option>
+                <option value="6">Hard (6x6)</option>
+            </select>
+            <select id="theme">
+                <option value="colors">Colors</option>
+                <option value="symbols">Symbols</option>
+            </select>
+            <button id="restart">Restart</button>
+        </div>
+        <div id="grid"></div>
+        <div class="info">
+            <p>Time: <span id="timer">00:00</span> | Moves: <span id="moves">0</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
