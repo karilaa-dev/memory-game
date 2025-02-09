@@ -5,6 +5,7 @@ class GameState {
         this.intervalId = null;
         this.theme = 'colors';
         this.gridSize = 2;
+        this.totalMoves = localStorage.getItem("totalMoves");
     }
 
     startTimer() {
@@ -17,11 +18,26 @@ class GameState {
         }
     }
 
+    addTotalMoves() {
+        let beforeMoves = parseInt(localStorage.getItem("totalMoves"));
+        console.info("Before Total Moves++", beforeMoves)
+        if (beforeMoves >= 0) {
+            console.info("New Total Moves++", beforeMoves+1)
+            localStorage.setItem("totalMoves", beforeMoves+1);
+            
+        }
+        else {
+            localStorage.setItem("totalMoves", 1);
+        }
+        this.totalMoves = localStorage.getItem("totalMoves");
+    }
+
     reset() {
         clearInterval(this.intervalId);
         this.intervalId = null;
         this.time = 0;
         this.moves = 0;
+        this.totalMoves = localStorage.getItem("totalMoves");
     }
 }
 
@@ -78,7 +94,9 @@ const handleCardClick = (e) => {
     if (flippedCards.length === 2) {
         canClick = false;
         gameState.moves++;
+        gameState.addTotalMoves()
         document.getElementById('moves').textContent = gameState.moves;
+        document.getElementById('totalMoves').textContent = gameState.totalMoves;
 
         const [first, second] = flippedCards;
         if (first.dataset.value === second.dataset.value) {
@@ -114,6 +132,7 @@ const checkGameOver = () => {
 
 const initGame = () => {
     gameState.reset();
+    document.getElementById('totalMoves').textContent = gameState.totalMoves;
     gameState.gridSize = parseInt(document.getElementById('difficulty').value);
     gameState.theme = document.getElementById('theme').value;
     
